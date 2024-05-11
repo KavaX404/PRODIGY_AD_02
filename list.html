@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List App</title>
+  <style>
+    /* CSS styles remain the same as in the previous code */
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>To-Do List</h2>
+  <input type="text" id="taskInput" placeholder="Add new task">
+  <button onclick="addTask()">Add Task</button>
+
+  <ul id="taskList">
+    <!-- Tasks will be dynamically added here -->
+  </ul>
+</div>
+
+<script>
+  // Function to add a new task
+  function addTask() {
+    var taskInput = document.getElementById("taskInput");
+    var taskValue = taskInput.value.trim();
+    if (taskValue !== "") {
+      var ul = document.getElementById("taskList");
+      var li = document.createElement("li");
+      li.textContent = taskValue;
+      
+      var editButton = document.createElement("button");
+      editButton.textContent = "Edit";
+      editButton.className = "edit";
+      editButton.onclick = function() {
+        var newText = prompt("Edit task", taskValue);
+        if (newText !== null) {
+          taskValue = newText.trim();
+          if (taskValue !== "") {
+            li.textContent = taskValue;
+          }
+        }
+      };
+      
+      var deleteButton = document.createElement("button");
+      deleteButton.textContent = "Delete";
+      deleteButton.className = "delete";
+      deleteButton.onclick = function() {
+        ul.removeChild(li);
+      };
+      
+      li.appendChild(editButton);
+      li.appendChild(deleteButton);
+      ul.appendChild(li);
+      
+      taskInput.value = ""; // Clear input field
+    }
+  }
+</script>
+
+</body>
+</html>
